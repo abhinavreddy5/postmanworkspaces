@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "5e5c80d3-c598-40ca-a60a-0c17b5de6048",
+		"name": "Fuzz Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24582999"
+	},
+	"item": [
+		{
+			"name": "FuzzTesting",
+			"item": [
+				{
+					"name": "Get Single User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/{{$randomInt}}",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{$randomInt}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Single User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"{{$randomNamePrefix}} {{$randomFileName}}\",\r\n\"job\":\"{{$randomJobTitle}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

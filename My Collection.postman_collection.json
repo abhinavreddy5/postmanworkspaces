@@ -1,0 +1,1139 @@
+{
+	"info": {
+		"_postman_id": "8ef9ca35-5435-4cd4-a3c2-95c9952fa3d8",
+		"name": "My Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24582999"
+	},
+	"item": [
+		{
+			"name": "Order of Execution",
+			"item": [
+				{
+					"name": "Bearer Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response code is 200\",function(){\r",
+									"pm.response.to.have.status(200);\r",
+									"\r",
+									"pm.test(\"Response time\",function(){pm.response.responseTime});\r",
+									"\r",
+									"console.log(pm.response.responseTime);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(\"Digest Auth\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer 12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/bearer",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+									"});\r",
+									"    pm.test(\"resonse time tobe < 500ms\",function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)\r",
+									"    });\r",
+									"\r",
+									"    console.log(pm.response.responseTime);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a Basic AUTH"
+					},
+					"response": []
+				},
+				{
+					"name": "SVG Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/image/svg",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"image",
+								"svg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Digest Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response is \",function(){\r",
+									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//skipping a test case\r",
+									"pm.test.skip(\"The response Code is Ok\",function(){\r",
+									"pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify if Cookie is present\", () => {\r",
+									"pm.expect(pm.cookies.has('fake')).to.be.true;\r",
+									"pm.expect(pm.cookies.has('stale_after')).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify if Cookie value is correct\", () => {\r",
+									"pm.expect(pm.cookies.get('fake')).to.eql(\"fake_value\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"postman.setNextRequest(\"\"); //this API is the last one to get executed in the collection"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "auth",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Digest Auth_example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://httpbin.org/digest-auth/auth/user/passwd",
+									"protocol": "http",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"digest-auth",
+										"auth",
+										"user",
+										"passwd"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 23 Dec 2022 04:22:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "gunicorn/19.9.0"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "fake=fake_value; Path=/"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "stale_after=never; Path=/"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authenticated\": true,\n    \"user\": \"user\"\n}"
+						}
+					]
+				}
+			],
+			"description": "**This Folder has all positive Test Scenarios**"
+		},
+		{
+			"name": "Positive TC_Duplicate",
+			"item": [
+				{
+					"name": "Bearer Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"The response code is\",function(){\r",
+									"// pm.response.to.have.status(200);\r",
+									"\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"//if the response code is 200 here then we want to execute the digest auth else we will stop.\r",
+									"\r",
+									"pm.test(\"Conditional check\",() => {\r",
+									"\r",
+									"if(pm.response.code==200){\r",
+									"postman.setNextRequest(\"Digest Auth\");\r",
+									"}\r",
+									"\r",
+									"else{\r",
+									"    postman.setNextRequest(\"\");\r",
+									"}\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Conditional Response\",() => {\r",
+									"if(pm.response.code==200)\r",
+									"    console.log(\"Bearer Auth API Response is 200\");\r",
+									"\r",
+									"    else\r",
+									"     console.log(\"The Response is not 200\");\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer 12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/bearer",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a Basic AUTH"
+					},
+					"response": []
+				},
+				{
+					"name": "SVG Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/image/svg",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"image",
+								"svg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Digest Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"The response is \",function(){\r",
+									"// pm.response.to.have.status(200);\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"pm.test(\"Conditional check\",() => {\r",
+									"\r",
+									"if(pm.response.code==200){\r",
+									"postman.setNextRequest(\"\");\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "auth",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**This Folder has all positive Test Scenarios**"
+		},
+		{
+			"name": "Negative TC",
+			"item": [
+				{
+					"name": "No AUTH Provided",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bearer Auth - No AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response code is\",function(){\r",
+									"pm.response.to.have.status(401);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/bearer",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Digest Auth - No AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response is \",function(){\r",
+									"pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic AUTH - No AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bearer Auth - Invalid Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The response code is\",function(){\r",
+									"pm.response.to.have.status(401);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Abhinav12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/bearer",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic Auth - Invalid User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Abhinav",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic Auth - Invalid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Abhinav",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Basic Auth - method not allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response body\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Method Not Allowed\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Abhinav",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://httpbin.org/basic-auth/user/passwd",
+							"protocol": "http",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reqres.in",
+			"item": [
+				{
+					"name": "Login Successful",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if the response has response body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"}); \r",
+									"\r",
+									"pm.test(\"verify the sttaus code\",function (){\r",
+									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"verify the response to be json\",function (){\r",
+									"pm.response.to.have.jsonBody();\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/login",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register/Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Abhinav\",\r\n    \"job\": \"CEO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var responseJson=pm.response.json();\r",
+									"\r",
+									"pm.test(\"Verify if first name is string\",function(){\r",
+									"pm.expect(responseJson.data.first_name).to.be.a('string');\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"verify if id id not null\",function(){\r",
+									"pm.expect(responseJson.data.id).is.not.null;\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify the response does not have error 4xx or 5xx\",function(){\r",
+									"pm.response.to.not.be.error;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify success\", function(){\r",
+									"pm.response.to.be.success;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify the response headers\",function(){\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.response.to.have.header(\"Date\");\r",
+									"pm.response.to.have.header(\"Transfer-Encoding\");\r",
+									"pm.response.to.have.header(\"Server\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify the response headers\",function(){\r",
+									"pm.response.to.have.header(\"Server\",\"cloudflare\");// to verify the value of the field, \r",
+									"pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DDT",
+			"item": [
+				{
+					"name": "GetListUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page={{myPageNumber}}",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{myPageNumber}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{myName}}\",\r\n    \"job\": \"{{myJob}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

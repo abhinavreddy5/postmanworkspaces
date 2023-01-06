@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "cef80978-0746-4c64-9b01-ae128b07d011",
+		"name": "My Collection2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24582999"
+	},
+	"item": [
+		{
+			"name": "Bearer Auth",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer 12345",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://httpbin.org/bearer",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"bearer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Basic Auth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "passwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://httpbin.org/basic-auth/user/passwd",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"basic-auth",
+						"user",
+						"passwd"
+					]
+				},
+				"description": "This is a Basic AUTH"
+			},
+			"response": []
+		},
+		{
+			"name": "SVG Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://httpbin.org/image/svg",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"svg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Digest Auth",
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "qop",
+							"value": "auth",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "passwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://httpbin.org/digest-auth/auth/user/passwd",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"digest-auth",
+						"auth",
+						"user",
+						"passwd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
